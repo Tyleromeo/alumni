@@ -1,0 +1,680 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SVA BFA Film — Alumni Page Concept</title>
+  <meta name="description" content="A poster-led alumni directory concept for SVA BFA Film.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23e21c2a'/%3E%3Cpath fill='white' d='M14 16h36v8H22v5h23v8H22v11h-8z'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --red: #e21c2a;
+      --ink: #111111;
+      --paper: #f6f6f3;
+      --white: #ffffff;
+      --muted: #66655f;
+      --line: #d7d7d1;
+      --focus: #1268f3;
+      --shadow: 0 18px 50px rgba(0, 0, 0, 0.18);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+      line-height: 1.45;
+    }
+
+    button, input { font: inherit; }
+
+    a { color: inherit; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 72px;
+      padding: 14px clamp(20px, 4vw, 64px);
+      color: var(--white);
+      background: var(--ink);
+      border-bottom: 5px solid var(--red);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      color: var(--white);
+      background: var(--red);
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+
+    .brand-copy {
+      display: grid;
+      gap: 1px;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+
+    .draft-label {
+      padding: 7px 10px;
+      color: #ddd;
+      border: 1px solid #5e5e5e;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(260px, .7fr);
+      gap: clamp(30px, 6vw, 96px);
+      padding: clamp(46px, 8vw, 112px) clamp(20px, 6vw, 96px) clamp(36px, 6vw, 76px);
+      color: var(--white);
+      background: var(--red);
+    }
+
+    .eyebrow {
+      margin: 0 0 16px;
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 860px;
+      margin: 0;
+      font-size: clamp(56px, 10vw, 132px);
+      font-weight: 900;
+      letter-spacing: -.075em;
+      line-height: .82;
+      text-transform: uppercase;
+    }
+
+    .intro-copy {
+      align-self: end;
+      margin: 0;
+      font-size: clamp(18px, 2vw, 26px);
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .controls {
+      padding: 30px clamp(20px, 6vw, 96px);
+      background: var(--white);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .filter-label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter-button {
+      min-height: 42px;
+      padding: 9px 13px;
+      color: var(--ink);
+      background: transparent;
+      border: 1px solid var(--ink);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .filter-button:hover,
+    .filter-button[aria-pressed="true"] {
+      color: var(--white);
+      background: var(--ink);
+    }
+
+    main { padding: 44px clamp(20px, 6vw, 96px) 80px; }
+
+    .section-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 22px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 50px);
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: clamp(18px, 2.4vw, 34px) clamp(14px, 2vw, 26px);
+    }
+
+    .card {
+      min-width: 0;
+      background: var(--white);
+      border: 1px solid var(--line);
+      transition: transform 160ms ease, box-shadow 160ms ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(0,0,0,.12);
+    }
+
+    .card[hidden] { display: none; }
+
+    .poster-button {
+      display: grid;
+      width: 100%;
+      padding: 0;
+      color: inherit;
+      text-align: left;
+      background: none;
+      border: 0;
+      cursor: pointer;
+    }
+
+    .poster {
+      position: relative;
+      display: flex;
+      aspect-ratio: 2 / 3;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 18px;
+      overflow: hidden;
+      color: var(--white);
+      background: var(--ink);
+      border-bottom: 7px solid var(--red);
+    }
+
+    .poster-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: var(--ink);
+    }
+
+    .poster-scrim {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,.42) 0%, transparent 38%, rgba(0,0,0,.86) 100%);
+    }
+
+    .poster-title {
+      position: relative;
+      z-index: 1;
+      display: block;
+      max-width: 95%;
+      font-size: clamp(24px, 2.5vw, 38px);
+      font-weight: 900;
+      letter-spacing: -.05em;
+      line-height: .92;
+      text-transform: uppercase;
+      overflow-wrap: anywhere;
+    }
+
+    .poster-year {
+      position: relative;
+      z-index: 1;
+      display: block;
+      margin-top: 8px;
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: .08em;
+    }
+
+    .card-body { padding: 18px 18px 20px; }
+
+    .alumni-name {
+      margin: 0 0 2px;
+      font-size: 21px;
+      line-height: 1.15;
+    }
+
+    .class-year {
+      margin: 0 0 9px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+
+    .role {
+      margin: 0 0 15px;
+      color: var(--red);
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .award-badge {
+      display: inline-block;
+      margin-top: 13px;
+      padding: 7px 9px;
+      color: var(--ink);
+      background: #f1c75b;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .04em;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    .award-badge.nominee {
+      background: #d7d7d1;
+    }
+
+    .view-profile {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 16px;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .view-profile::after { content: "→"; font-size: 18px; }
+
+    .empty {
+      display: none;
+      padding: 48px;
+      text-align: center;
+      background: var(--white);
+      border: 1px solid var(--line);
+    }
+
+    .empty.visible { display: block; }
+
+    .internal-note {
+      margin-top: 54px;
+      padding: 22px;
+      color: #484844;
+      background: #ecece7;
+      border-left: 6px solid var(--red);
+      font-size: 14px;
+    }
+
+    .internal-note strong {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--ink);
+      text-transform: uppercase;
+    }
+
+    dialog {
+      width: min(760px, calc(100vw - 28px));
+      max-height: calc(100vh - 28px);
+      padding: 0;
+      color: var(--ink);
+      background: var(--white);
+      border: 0;
+      box-shadow: var(--shadow);
+    }
+
+    dialog::backdrop { background: rgba(0,0,0,.76); }
+
+    .dialog-top {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 26px 28px 22px;
+      color: var(--white);
+      background: var(--ink);
+      border-bottom: 7px solid var(--red);
+    }
+
+    .dialog-top h3 {
+      margin: 0;
+      font-size: clamp(30px, 5vw, 52px);
+      letter-spacing: -.04em;
+      line-height: 1;
+    }
+
+    .dialog-role {
+      margin: 8px 0 0;
+      color: #ff7e86;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .dialog-year {
+      margin: 5px 0 0;
+      color: #d7d7d1;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .close-button {
+      display: grid;
+      width: 44px;
+      height: 44px;
+      flex: 0 0 44px;
+      place-items: center;
+      color: var(--white);
+      background: transparent;
+      border: 1px solid #777;
+      cursor: pointer;
+      font-size: 24px;
+    }
+
+    .dialog-content { padding: 28px; }
+
+    .featured-credit {
+      margin-bottom: 28px;
+      padding: 20px;
+      background: var(--red);
+      color: var(--white);
+    }
+
+    .featured-credit span {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .featured-credit strong {
+      display: block;
+      font-size: clamp(25px, 5vw, 44px);
+      line-height: 1;
+    }
+
+    .dialog-content h4 {
+      margin: 0 0 12px;
+      font-size: 14px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .credit-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .credit-list li {
+      min-height: 86px;
+      padding: 14px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      font-weight: 800;
+    }
+
+    .dialog-note {
+      margin: 24px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .profile-links {
+      display: grid;
+      justify-items: start;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .imdb-link {
+      display: inline-flex;
+      padding: 10px 12px;
+      color: var(--ink);
+      background: #f5c518;
+      border: 1px solid var(--ink);
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+
+    .imdb-link:hover { background: #ffd84d; }
+
+    .image-source {
+      display: inline-block;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    button:focus-visible,
+    input:focus-visible,
+    a:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 1050px) {
+      .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .intro { grid-template-columns: 1fr; }
+      .intro-copy { max-width: 680px; }
+    }
+
+    @media (max-width: 760px) {
+      .draft-label { display: none; }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .credit-list { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 500px) {
+      .topbar { min-height: 64px; }
+      .brand-copy { font-size: 12px; }
+      h1 { font-size: 53px; }
+      .grid { grid-template-columns: 1fr; }
+      .poster-title { font-size: 39px; }
+      .section-heading { align-items: end; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="SVA BFA Film alumni concept home">
+      <span class="brand-mark" aria-hidden="true">SVA</span>
+      <span class="brand-copy"><span>BFA Film</span><span>Alumni</span></span>
+    </a>
+    <span class="draft-label">Website concept · Internal review</span>
+  </header>
+
+  <section class="intro" id="top">
+    <div>
+      <p class="eyebrow">SVA BFA Film</p>
+      <h1>Alumni at work</h1>
+    </div>
+    <p class="intro-copy">Meet graduates whose work spans directing, screenwriting, cinematography, editing, sound, music and makeup across film and television.</p>
+  </section>
+
+  <section class="controls" aria-label="Alumni filters">
+    <div>
+      <span class="filter-label">Filter by craft</span>
+      <div class="filters" id="filters">
+        <button class="filter-button" type="button" data-filter="all" aria-pressed="true">All</button>
+        <button class="filter-button" type="button" data-filter="directing" aria-pressed="false">Directing</button>
+        <button class="filter-button" type="button" data-filter="writing" aria-pressed="false">Writing</button>
+        <button class="filter-button" type="button" data-filter="cinematography" aria-pressed="false">Cinematography</button>
+        <button class="filter-button" type="button" data-filter="editing" aria-pressed="false">Editing</button>
+        <button class="filter-button" type="button" data-filter="sound" aria-pressed="false">Sound</button>
+        <button class="filter-button" type="button" data-filter="music" aria-pressed="false">Music</button>
+        <button class="filter-button" type="button" data-filter="makeup" aria-pressed="false">Makeup</button>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <div class="section-heading">
+      <h2>Selected alumni</h2>
+    </div>
+    <div class="grid" id="alumni-grid"></div>
+    <div class="empty" id="empty-state">No alumni match this search.</div>
+
+    <aside class="internal-note">
+      <strong>Internal production note</strong>
+      This concept uses small promotional thumbnails only to identify and discuss each alumnus’s credited contribution. The images remain copyrighted; their inclusion here does not establish permission for public release. Alumni status, class years, titles, credits and image rights should be confirmed before publication.
+    </aside>
+  </main>
+
+  <dialog id="profile-dialog" aria-labelledby="dialog-name">
+    <div class="dialog-top">
+      <div>
+        <h3 id="dialog-name"></h3>
+        <p class="dialog-role" id="dialog-role"></p>
+        <p class="dialog-year" id="dialog-year"></p>
+      </div>
+      <button class="close-button" id="close-dialog" type="button" aria-label="Close profile">×</button>
+    </div>
+    <div class="dialog-content">
+      <div class="featured-credit">
+        <span>Selected work</span>
+        <strong id="dialog-featured"></strong>
+      </div>
+      <h4>Additional credits</h4>
+      <ul class="credit-list" id="dialog-credits"></ul>
+      <div class="profile-links">
+        <a class="imdb-link" id="dialog-imdb" href="#" target="_blank" rel="noopener noreferrer">View on IMDb ↗</a>
+        <a class="image-source" id="dialog-source" href="#" target="_blank" rel="noopener noreferrer">View thumbnail source and rights note ↗</a>
+      </div>
+      <p class="dialog-note">Final profile may also include a short biography, an approved portrait and professional links.</p>
+    </div>
+  </dialog>
+
+  <script>
+    const alumni = [
+      { name: "Paul Fox", year: "BFA 1990", role: "Director", craft: "directing", featured: "Schitt’s Creek", featuredYear: "2015–2020", credits: ["Schitt’s Creek (2015–2020)", "Anne with an E (2017–2019)", "Workin’ Moms (2017–2023)"], poster: "https://thumb.wikimedia.org/wikipedia/en/thumb/d/d4/Schitts_Creek_S1poster.jpg/250px-Schitts_Creek_S1poster.jpg", source: "https://en.wikipedia.org/wiki/File:Schitts_Creek_S1poster.jpg", imdb: "https://www.imdb.com/name/nm0289186/" },
+      { name: "Jarin Blaschke", year: "BFA 2000", role: "Cinematographer / Director of Photography", craft: "cinematography", featured: "Nosferatu", featuredYear: "2024", award: "2× Oscar nominee · Cinematography", awardKind: "nominee", credits: ["Nosferatu (2024)", "The Northman (2022)", "The Lighthouse (2019)"], poster: "https://upload.wikimedia.org/wikipedia/en/4/48/Nosferatu_IMAX_poster_2024.jpg", source: "https://en.wikipedia.org/wiki/File:Nosferatu_IMAX_poster_2024.jpg", imdb: "https://www.imdb.com/name/nm1144916/" },
+      { name: "Michael Giacchino", year: "BFA 1990", role: "Composer", craft: "music", featured: "Up", featuredYear: "2009", award: "Oscar winner · Original Score", credits: ["Up (2009)", "Rogue One: A Star Wars Story (2016)", "Spider-Man: Far From Home (2019)"], poster: "https://upload.wikimedia.org/wikipedia/en/0/05/Up_%282009_film%29.jpg", source: "https://en.wikipedia.org/wiki/File:Up_(2009_film).jpg", imdb: "https://www.imdb.com/name/nm0315974/" },
+      { name: "Dan Minahan", year: "BFA 1987", role: "Director", craft: "directing", featured: "Game of Thrones", featuredYear: "2011–2019", credits: ["Game of Thrones (2011–2019)", "House of Cards (2013–2018)", "True Blood (2008–2014)"], poster: "https://m.media-amazon.com/images/M/MV5BNGYxOGJkMjItZjVkZC00OGEzLWExNjktOTZmNGZhZmRlMTk2XkEyXkFqcGc@._V1_.jpg", source: "https://www.imdb.com/title/tt0944947/", imdb: "https://www.imdb.com/name/nm0590889/" },
+      { name: "Yaron Orbach", year: "BFA 2000", role: "Director of Photography", craft: "cinematography", featured: "Sing Street", featuredYear: "2016", credits: ["Sing Street (2016)", "Orange Is the New Black (2013–2019)", "Lucky (2017)"], poster: "https://upload.wikimedia.org/wikipedia/en/2/2c/Sing_Street_poster.jpeg", source: "https://en.wikipedia.org/wiki/File:Sing_Street_poster.jpeg", imdb: "https://www.imdb.com/name/nm1078971/" },
+      { name: "Boris Krichevsky", year: "BFA 2017", role: "Production Sound Mixer / Sound Recordist", craft: "sound", featured: "Anora", featuredYear: "2024", credits: ["Anora (2024)", "Right Near the Beach (2020)", "Douggy (2017)"], poster: "https://upload.wikimedia.org/wikipedia/en/2/2b/Anora_%282024_film%29_poster.jpg", source: "https://en.wikipedia.org/wiki/File:Anora_(2024_film)_poster.jpg", imdb: "https://www.imdb.com/name/nm8403642/" },
+      { name: "Mark Ulano", year: "BFA 1975", role: "Production Sound Mixer", craft: "sound", featured: "Titanic", featuredYear: "1997", award: "Oscar winner · Sound Mixing", credits: ["Titanic (1997)", "Once Upon a Time… in Hollywood (2019)", "Iron Man (2008)"], poster: "https://upload.wikimedia.org/wikipedia/en/1/18/Titanic_%281997_film%29_poster.png", source: "https://en.wikipedia.org/wiki/File:Titanic_(1997_film)_poster.png", imdb: "https://www.imdb.com/name/nm0880360/" },
+      { name: "Gillian Robespierre", year: "BFA 2005", role: "Writer / Director", craft: "directing", featured: "Only Murders in the Building", featuredYear: "2021–present", credits: ["Only Murders in the Building (2021–present)", "Obvious Child (2014)", "Silicon Valley (2014–2019)"], poster: "https://vader-prod.s3.amazonaws.com/1631646915-201-omitb-keyart-rgb-fin-digital-1631646495.jpg", source: "https://www.elle.com/culture/movies-tv/a37597624/only-murders-in-the-building-season-2-release-date-news-trailer-cast/", imdb: "https://www.imdb.com/name/nm3521871/" },
+      { name: "Morten Tyldum", year: "BFA 1991", role: "Director", craft: "directing", featured: "The Imitation Game", featuredYear: "2014", award: "Oscar nominee · Directing", awardKind: "nominee", credits: ["The Imitation Game (2014)", "Passengers (2016)", "Defending Jacob (2020)"], poster: "https://upload.wikimedia.org/wikipedia/en/8/87/The_Imitation_Game_%282014%29.png", source: "https://en.wikipedia.org/wiki/File:The_Imitation_Game_(2014).png", imdb: "https://www.imdb.com/name/nm0878763/" },
+      { name: "J. Michael Muro", year: "BFA 1992", role: "Director of Photography", craft: "cinematography", featured: "Crash", featuredYear: "2004", credits: ["Crash (2004)", "Shameless (2011–2021)", "Rush Hour 3 (2007)"], poster: "https://upload.wikimedia.org/wikipedia/en/d/d0/Crash_ver2.jpg", source: "https://en.wikipedia.org/wiki/File:Crash_ver2.jpg", imdb: "https://www.imdb.com/name/nm0614013/" },
+      { name: "Aaron Yanes", year: "BFA 2001", role: "Editor", craft: "editing", featured: "Your Friends & Neighbors", featuredYear: "2025–present", credits: ["Your Friends & Neighbors (2025–present)", "See (2019–2022)", "The Immortal Life of Henrietta Lacks (2017)"], poster: "https://m.media-amazon.com/images/M/MV5BMjM0ZWFhMzEtOWVlYS00Y2VkLTk1MzEtZWQwM2E1YjFkNjlmXkEyXkFqcGc@._V1_QL75_UX400_.jpg", source: "https://www.imdb.com/title/tt30459041/mediaviewer/rm211800834/?ref_=tt_ov_i", imdb: "https://www.imdb.com/name/nm1249417/" },
+      { name: "Harris Savides", year: "BFA 1982", role: "Cinematographer", craft: "cinematography", featured: "Zodiac", featuredYear: "2007", credits: ["Zodiac (2007)", "American Gangster (2007)", "The Game (1997)"], poster: "https://upload.wikimedia.org/wikipedia/en/3/3a/Zodiac2007Poster.jpg", source: "https://en.wikipedia.org/wiki/File:Zodiac2007Poster.jpg", imdb: "https://www.imdb.com/name/nm0767647/" },
+      { name: "Ti West", year: "BFA 2003", role: "Writer / Director", craft: "directing", featured: "X", featuredYear: "2022", credits: ["X (2022)", "Pearl (2022)", "MaXXXine (2024)"], poster: "https://thumb.wikimedia.org/wikipedia/en/thumb/3/34/X_%282022_film%29.jpeg/250px-X_%282022_film%29.jpeg", source: "https://en.wikipedia.org/wiki/File:X_(2022_film).jpeg", imdb: "https://www.imdb.com/name/nm1488800/" },
+      { name: "Judy Chin", year: "BFA 1988", role: "Makeup Artist / Makeup Designer", craft: "makeup", featured: "The Whale", featuredYear: "2022", award: "Oscar winner · Makeup & Hairstyling", credits: ["The Whale (2022)", "Black Swan (2010)", "Frida (2002)"], poster: "https://upload.wikimedia.org/wikipedia/en/f/f3/TheWhalePoster.jpg", source: "https://en.wikipedia.org/wiki/File:TheWhalePoster.jpg", imdb: "https://www.imdb.com/name/nm0155275/" },
+      { name: "Darren Lemke", year: "BFA 1992", role: "Screenwriter", craft: "writing", featured: "Gemini Man", featuredYear: "2019", credits: ["Gemini Man (2019)", "Shazam! (2019)", "Goosebumps (2015)"], poster: "https://upload.wikimedia.org/wikipedia/en/5/5b/GeminiManPoster.jpeg", source: "https://en.wikipedia.org/wiki/File:GeminiManPoster.jpeg", imdb: "https://www.imdb.com/name/nm0501359/" },
+      { name: "Julia Ward", year: "BFA 2020", role: "Associate Finishing Producer", craft: "editing", featured: "Avengers: Doomsday", featuredYear: "2026", credits: ["Avengers: Doomsday (2026)", "Severance (2022–present)", "Barbie (2023)", "Killers of the Flower Moon (2023)"], poster: "https://lumiere-a.akamaihd.net/v1/images/applepie_teaser2_poster_united_kingdom_eb9b6c9d.jpeg?region=0%2C0%2C2756%2C3937&width=360", source: "https://press.disney.co.uk/press-kit/avengers-doomsday-press-kit", imdb: "https://www.imdb.com/name/nm9241391/" },
+      { name: "Jared Simon", year: "BFA 2015", role: "Editor / Assistant Editor", craft: "editing", featured: "Ad Astra", featuredYear: "2019", credits: ["Ad Astra (2019)", "The Piano Lesson (2024)", "Chevalier (2022)"], poster: "https://upload.wikimedia.org/wikipedia/en/c/cb/Ad_Astra_-_film_poster.jpg", source: "https://en.wikipedia.org/wiki/File:Ad_Astra_-_film_poster.jpg", imdb: "https://www.imdb.com/name/nm6544259/" }
+    ];
+
+    const grid = document.querySelector("#alumni-grid");
+    const filters = document.querySelector("#filters");
+    const emptyState = document.querySelector("#empty-state");
+    const dialog = document.querySelector("#profile-dialog");
+    const closeDialog = document.querySelector("#close-dialog");
+    let activeFilter = "all";
+
+    function cardTemplate(person, index) {
+      return `
+        <article class="card" data-craft="${person.craft}" data-search="${[person.name, person.year, person.role, ...person.credits].join(" ").toLowerCase()}">
+          <button class="poster-button" type="button" data-profile="${index}" aria-label="Open profile for ${person.name}">
+            <div class="poster">
+              <img class="poster-image" src="${person.poster}" alt="${person.featured} promotional thumbnail" loading="lazy" referrerpolicy="no-referrer" onerror="this.hidden=true">
+              <span class="poster-scrim" aria-hidden="true"></span>
+              <span><span class="poster-title">${person.featured}</span><span class="poster-year">${person.featuredYear}</span></span>
+            </div>
+            <div class="card-body">
+              <h3 class="alumni-name">${person.name}</h3>
+              <p class="class-year">${person.year}</p>
+              <p class="role">${person.role}</p>
+              ${person.award ? `<span class="award-badge ${person.awardKind === "nominee" ? "nominee" : ""}">${person.award}</span>` : ""}
+              <span class="view-profile">View additional credits</span>
+            </div>
+          </button>
+        </article>`;
+    }
+
+    grid.innerHTML = alumni.map(cardTemplate).join("");
+
+    function applyFilters() {
+      let visible = 0;
+      grid.querySelectorAll(".card").forEach(card => {
+        const craftMatch = activeFilter === "all" || card.dataset.craft === activeFilter;
+        card.hidden = !craftMatch;
+        if (!card.hidden) visible += 1;
+      });
+      emptyState.classList.toggle("visible", visible === 0);
+    }
+
+    filters.addEventListener("click", event => {
+      const button = event.target.closest("button[data-filter]");
+      if (!button) return;
+      activeFilter = button.dataset.filter;
+      filters.querySelectorAll("button").forEach(item => item.setAttribute("aria-pressed", String(item === button)));
+      applyFilters();
+    });
+
+    grid.addEventListener("click", event => {
+      const button = event.target.closest("button[data-profile]");
+      if (!button) return;
+      const person = alumni[Number(button.dataset.profile)];
+      document.querySelector("#dialog-name").textContent = person.name;
+      document.querySelector("#dialog-role").textContent = person.role;
+      document.querySelector("#dialog-year").textContent = person.year;
+      document.querySelector("#dialog-featured").innerHTML = `${person.featured} (${person.featuredYear}) — ${person.role}${person.award ? `<span class="award-badge ${person.awardKind === "nominee" ? "nominee" : ""}">${person.award}</span>` : ""}`;
+      document.querySelector("#dialog-credits").innerHTML = person.credits.slice(1).map(credit => `<li>${credit}</li>`).join("");
+      document.querySelector("#dialog-imdb").href = person.imdb;
+      document.querySelector("#dialog-imdb").textContent = `View ${person.name} on IMDb ↗`;
+      document.querySelector("#dialog-source").href = person.source;
+      dialog.showModal();
+    });
+
+    closeDialog.addEventListener("click", () => dialog.close());
+    dialog.addEventListener("click", event => {
+      const box = dialog.getBoundingClientRect();
+      const outside = event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom;
+      if (outside) dialog.close();
+    });
+  </script>
+</body>
+</html>
