@@ -8,31 +8,30 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23e21c2a'/%3E%3Cpath fill='white' d='M14 16h36v8H22v5h23v8H22v11h-8z'/%3E%3C/svg%3E">
   <style>
     :root {
-      --red: #e21c2a;
-      --ink: #111111;
-      --paper: #f6f6f3;
-      --white: #ffffff;
-      --muted: #66655f;
-      --line: #d7d7d1;
-      --focus: #1268f3;
-      --shadow: 0 18px 50px rgba(0, 0, 0, 0.18);
+      --sva-red: #ef3d2f;
+      --sva-teal: #147b91;
+      --ink: #171717;
+      --white: #fff;
+      --soft: #f2f1ed;
+      --muted: #5d5d5a;
+      --line: #8c8c88;
+      --focus: #006cff;
+      --shadow: 0 20px 60px rgba(0, 0, 0, .24);
+      --display: Impact, Haettenschweiler, "Arial Narrow Bold", "Arial Narrow", sans-serif;
+      --body: Arial, Helvetica, sans-serif;
     }
 
     * { box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
-
     body {
       margin: 0;
       color: var(--ink);
-      background: var(--paper);
-      font-family: Arial, Helvetica, sans-serif;
+      background: var(--white);
+      font-family: var(--body);
       font-size: 16px;
-      line-height: 1.45;
+      line-height: 1.42;
     }
-
     button, input { font: inherit; }
-
     a { color: inherit; }
 
     .topbar {
@@ -40,168 +39,172 @@
       top: 0;
       z-index: 10;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      min-height: 72px;
-      padding: 14px clamp(20px, 4vw, 64px);
-      color: var(--white);
-      background: var(--ink);
-      border-bottom: 5px solid var(--red);
+      min-height: 68px;
+      align-items: stretch;
+      color: var(--ink);
+      background: var(--white);
+      border-bottom: 1px solid var(--line);
     }
-
     .brand {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 12px;
+      padding: 12px clamp(18px, 2.5vw, 38px);
       text-decoration: none;
     }
-
     .brand-mark {
       display: grid;
       width: 42px;
       height: 42px;
       place-items: center;
-      color: var(--white);
-      background: var(--red);
-      font-size: 17px;
-      font-weight: 900;
-      letter-spacing: -1px;
+      color: var(--sva-red);
+      font-family: var(--display);
+      font-size: 34px;
+      line-height: 1;
     }
-
-    .brand-copy {
+    .brand-copy { display: none; }
+    .global-nav {
+      display: flex;
+      align-items: center;
+      gap: clamp(18px, 2vw, 30px);
+      margin-right: auto;
+      font-family: var(--display);
+      font-size: 18px;
+      letter-spacing: .025em;
+      text-transform: uppercase;
+    }
+    .global-nav a { text-decoration: none; }
+    .global-nav a:hover { color: var(--sva-red); }
+    .header-actions { display: flex; align-items: stretch; }
+    .header-action {
       display: grid;
-      gap: 1px;
-      font-size: 14px;
-      font-weight: 800;
-      letter-spacing: .08em;
-      line-height: 1.1;
+      min-width: 86px;
+      padding: 0 18px;
+      place-items: center;
+      color: var(--sva-teal);
+      border-left: 1px solid var(--line);
+      font-family: var(--display);
+      font-size: 17px;
+      letter-spacing: .035em;
+      text-decoration: none;
       text-transform: uppercase;
     }
-
-    .draft-label {
-      padding: 7px 10px;
-      color: #ddd;
-      border: 1px solid #5e5e5e;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
+    .header-action:hover { color: var(--white); background: var(--sva-teal); }
 
     .intro {
       display: grid;
-      grid-template-columns: minmax(0, 1.5fr) minmax(260px, .7fr);
-      gap: clamp(30px, 6vw, 96px);
-      padding: clamp(46px, 8vw, 112px) clamp(20px, 6vw, 96px) clamp(36px, 6vw, 76px);
-      color: var(--white);
-      background: var(--red);
-    }
-
-    .eyebrow {
-      margin: 0 0 16px;
-      font-size: 14px;
-      font-weight: 900;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      max-width: 860px;
-      margin: 0;
-      font-size: clamp(56px, 10vw, 132px);
-      font-weight: 900;
-      letter-spacing: -.075em;
-      line-height: .82;
-      text-transform: uppercase;
-    }
-
-    .intro-copy {
-      align-self: end;
-      margin: 0;
-      font-size: clamp(18px, 2vw, 26px);
-      font-weight: 700;
-      line-height: 1.3;
-    }
-
-    .controls {
-      padding: 30px clamp(20px, 6vw, 96px);
+      grid-template-columns: minmax(0, 1.5fr) minmax(280px, .8fr);
+      gap: clamp(28px, 6vw, 90px);
+      padding: 28px clamp(24px, 3vw, 46px) 30px;
       background: var(--white);
       border-bottom: 1px solid var(--line);
     }
+    .eyebrow {
+      margin: 0 0 2px;
+      color: var(--sva-teal);
+      font-family: var(--display);
+      font-size: clamp(19px, 2.2vw, 31px);
+      letter-spacing: .015em;
+    }
+    h1 {
+      max-width: 900px;
+      margin: 0;
+      color: var(--sva-red);
+      font-family: var(--display);
+      font-size: clamp(54px, 7.5vw, 108px);
+      font-weight: 900;
+      letter-spacing: .005em;
+      line-height: .87;
+    }
+    .intro-copy {
+      align-self: end;
+      max-width: 570px;
+      margin: 0 0 4px;
+      font-size: clamp(18px, 1.7vw, 25px);
+      font-weight: 700;
+      line-height: 1.22;
+    }
+    .department-nav {
+      display: flex;
+      gap: clamp(24px, 4vw, 64px);
+      padding: 18px clamp(24px, 3vw, 46px);
+      overflow-x: auto;
+      background: var(--white);
+      border-bottom: 1px solid var(--line);
+      font-family: var(--display);
+      font-size: 19px;
+      white-space: nowrap;
+    }
+    .department-nav a { color: var(--sva-red); text-decoration: none; }
+    .department-nav a[aria-current="page"] { color: var(--ink); }
+    .department-nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
 
+    .controls {
+      padding: 24px clamp(24px, 3vw, 46px) 26px;
+      background: var(--soft);
+      border-bottom: 1px solid var(--line);
+    }
     .filter-label {
       display: block;
-      margin-bottom: 8px;
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: .08em;
+      margin-bottom: 10px;
+      color: var(--sva-teal);
+      font-family: var(--display);
+      font-size: 17px;
+      letter-spacing: .035em;
       text-transform: uppercase;
     }
-
-    .filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
+    .filters { display: flex; flex-wrap: wrap; gap: 9px; }
     .filter-button {
-      min-height: 42px;
-      padding: 9px 13px;
-      color: var(--ink);
-      background: transparent;
-      border: 1px solid var(--ink);
+      min-height: 39px;
+      padding: 7px 14px;
+      color: var(--sva-red);
+      background: var(--white);
+      border: 1px solid var(--sva-red);
       cursor: pointer;
-      font-size: 14px;
-      font-weight: 800;
+      font-family: var(--display);
+      font-size: 16px;
+      letter-spacing: .02em;
+      text-transform: uppercase;
     }
-
     .filter-button:hover,
-    .filter-button[aria-pressed="true"] {
-      color: var(--white);
-      background: var(--ink);
-    }
+    .filter-button[aria-pressed="true"] { color: var(--white); background: var(--sva-red); }
 
-    main { padding: 44px clamp(20px, 6vw, 96px) 80px; }
-
+    main { padding: 38px clamp(24px, 3vw, 46px) 78px; }
     .section-heading {
       display: flex;
       align-items: baseline;
       justify-content: space-between;
       gap: 20px;
-      margin-bottom: 22px;
+      margin-bottom: 21px;
     }
-
     h2 {
       margin: 0;
-      font-size: clamp(28px, 4vw, 50px);
-      line-height: 1;
-      text-transform: uppercase;
+      color: var(--sva-red);
+      font-family: var(--display);
+      font-size: clamp(38px, 5vw, 70px);
+      letter-spacing: .01em;
+      line-height: .95;
     }
-
     .grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: clamp(18px, 2.4vw, 34px) clamp(14px, 2vw, 26px);
+      gap: 0;
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
     }
-
     .card {
       min-width: 0;
       background: var(--white);
-      border: 1px solid var(--line);
-      transition: transform 160ms ease, box-shadow 160ms ease;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      transition: background 140ms ease;
     }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 28px rgba(0,0,0,.12);
-    }
-
+    .card:hover { background: var(--soft); }
     .card[hidden] { display: none; }
-
     .poster-button {
       display: grid;
       width: 100%;
+      height: 100%;
       padding: 0;
       color: inherit;
       text-align: left;
@@ -209,20 +212,18 @@
       border: 0;
       cursor: pointer;
     }
-
     .poster {
       position: relative;
       display: flex;
       aspect-ratio: 2 / 3;
       flex-direction: column;
       justify-content: space-between;
-      padding: 18px;
+      padding: 17px;
       overflow: hidden;
       color: var(--white);
       background: var(--ink);
-      border-bottom: 7px solid var(--red);
+      border-bottom: 8px solid var(--sva-red);
     }
-
     .poster-image {
       position: absolute;
       inset: 0;
@@ -230,287 +231,193 @@
       height: 100%;
       object-fit: cover;
       background: var(--ink);
+      transition: transform 300ms ease;
     }
-
+    .card:hover .poster-image { transform: scale(1.025); }
     .poster-scrim {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,.42) 0%, transparent 38%, rgba(0,0,0,.86) 100%);
+      background: linear-gradient(180deg, rgba(0,0,0,.46) 0%, transparent 40%, rgba(0,0,0,.86) 100%);
     }
-
     .poster-title {
       position: relative;
       z-index: 1;
       display: block;
-      max-width: 95%;
-      font-size: clamp(24px, 2.5vw, 38px);
-      font-weight: 900;
-      letter-spacing: -.05em;
-      line-height: .92;
+      max-width: 96%;
+      font-family: var(--display);
+      font-size: clamp(27px, 2.45vw, 40px);
+      letter-spacing: .015em;
+      line-height: .9;
       text-transform: uppercase;
       overflow-wrap: anywhere;
     }
-
     .poster-year {
       position: relative;
       z-index: 1;
       display: block;
       margin-top: 8px;
-      font-size: 14px;
-      font-weight: 900;
-      letter-spacing: .08em;
+      font-family: var(--display);
+      font-size: 15px;
+      letter-spacing: .055em;
     }
-
-    .card-body { padding: 18px 18px 20px; }
-
+    .card-body { padding: 17px 17px 21px; }
     .alumni-name {
       margin: 0 0 2px;
-      font-size: 21px;
-      line-height: 1.15;
+      font-family: var(--display);
+      font-size: 27px;
+      letter-spacing: .01em;
+      line-height: 1;
     }
-
     .class-year {
       margin: 0 0 9px;
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: .05em;
+      color: var(--sva-teal);
+      font-family: var(--display);
+      font-size: 15px;
+      letter-spacing: .035em;
       text-transform: uppercase;
     }
-
     .role {
-      margin: 0 0 15px;
-      color: var(--red);
-      font-size: 14px;
-      font-weight: 900;
-      letter-spacing: .04em;
+      margin: 0 0 12px;
+      color: var(--sva-red);
+      font-family: var(--display);
+      font-size: 16px;
+      letter-spacing: .025em;
       text-transform: uppercase;
     }
-
     .award-badge {
       display: inline-block;
-      margin-top: 13px;
-      padding: 7px 9px;
+      margin-top: 8px;
+      padding: 6px 8px;
       color: var(--ink);
-      background: #f1c75b;
-      font-size: 12px;
+      background: #f2c849;
+      border: 1px solid var(--ink);
+      font-size: 11px;
       font-weight: 900;
-      letter-spacing: .04em;
+      letter-spacing: .035em;
       line-height: 1.2;
       text-transform: uppercase;
     }
-
-    .award-badge.nominee {
-      background: #d7d7d1;
-    }
-
+    .award-badge.nominee { background: var(--soft); }
     .view-profile {
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      margin-top: 16px;
-      font-size: 13px;
-      font-weight: 900;
-      letter-spacing: .08em;
+      margin-top: 14px;
+      font-family: var(--display);
+      font-size: 15px;
+      letter-spacing: .035em;
       text-transform: uppercase;
     }
-
-    .view-profile::after { content: "→"; font-size: 18px; }
-
-    .empty {
-      display: none;
-      padding: 48px;
-      text-align: center;
-      background: var(--white);
-      border: 1px solid var(--line);
-    }
-
+    .view-profile::after { content: "→"; color: var(--sva-red); font-family: var(--body); font-size: 20px; }
+    .empty { display: none; padding: 48px; text-align: center; background: var(--soft); border: 1px solid var(--line); }
     .empty.visible { display: block; }
-
     .internal-note {
-      margin-top: 54px;
-      padding: 22px;
-      color: #484844;
-      background: #ecece7;
-      border-left: 6px solid var(--red);
+      margin-top: 38px;
+      padding: 20px 22px;
+      color: #454542;
+      background: var(--soft);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
       font-size: 14px;
     }
-
     .internal-note strong {
       display: block;
       margin-bottom: 5px;
-      color: var(--ink);
+      color: var(--sva-teal);
+      font-family: var(--display);
+      font-size: 17px;
+      letter-spacing: .03em;
       text-transform: uppercase;
     }
+    .site-footer {
+      display: grid;
+      grid-template-columns: 1.4fr repeat(3, minmax(120px, .55fr));
+      gap: 34px;
+      padding: 38px clamp(24px, 3vw, 46px) 46px;
+      color: var(--white);
+      background: var(--ink);
+      border-top: 8px solid var(--sva-red);
+    }
+    .footer-title { margin: 0 0 12px; font-family: var(--display); font-size: 27px; letter-spacing: .02em; }
+    .footer-copy { max-width: 430px; margin: 0; color: #d1d1cc; font-size: 14px; }
+    .footer-group strong { display: block; margin-bottom: 10px; color: var(--sva-red); font-family: var(--display); font-size: 17px; text-transform: uppercase; }
+    .footer-group a { display: block; margin: 6px 0; color: var(--white); text-decoration: none; }
+    .footer-group a:hover { text-decoration: underline; }
 
     dialog {
-      width: min(760px, calc(100vw - 28px));
+      width: min(780px, calc(100vw - 28px));
       max-height: calc(100vh - 28px);
       padding: 0;
       color: var(--ink);
       background: var(--white);
-      border: 0;
+      border: 1px solid var(--ink);
       box-shadow: var(--shadow);
     }
-
     dialog::backdrop { background: rgba(0,0,0,.76); }
-
     .dialog-top {
       display: flex;
       align-items: start;
       justify-content: space-between;
       gap: 20px;
-      padding: 26px 28px 22px;
-      color: var(--white);
-      background: var(--ink);
-      border-bottom: 7px solid var(--red);
+      padding: 25px 28px 22px;
+      color: var(--ink);
+      background: var(--white);
+      border-bottom: 8px solid var(--sva-red);
     }
-
-    .dialog-top h3 {
-      margin: 0;
-      font-size: clamp(30px, 5vw, 52px);
-      letter-spacing: -.04em;
-      line-height: 1;
-    }
-
-    .dialog-role {
-      margin: 8px 0 0;
-      color: #ff7e86;
-      font-weight: 800;
-      text-transform: uppercase;
-    }
-
-    .dialog-year {
-      margin: 5px 0 0;
-      color: #d7d7d1;
-      font-size: 14px;
-      font-weight: 800;
-    }
-
+    .dialog-top h3 { margin: 0; color: var(--sva-red); font-family: var(--display); font-size: clamp(38px, 6vw, 64px); letter-spacing: .01em; line-height: .9; }
+    .dialog-role { margin: 10px 0 0; color: var(--ink); font-family: var(--display); font-size: 18px; text-transform: uppercase; }
+    .dialog-year { margin: 4px 0 0; color: var(--sva-teal); font-family: var(--display); font-size: 16px; }
     .close-button {
       display: grid;
       width: 44px;
       height: 44px;
       flex: 0 0 44px;
       place-items: center;
-      color: var(--white);
+      color: var(--sva-red);
       background: transparent;
-      border: 1px solid #777;
+      border: 1px solid var(--sva-red);
       cursor: pointer;
-      font-size: 24px;
+      font-size: 26px;
     }
-
+    .close-button:hover { color: var(--white); background: var(--sva-red); }
     .dialog-content { padding: 28px; }
+    .featured-credit { margin-bottom: 28px; padding: 20px; color: var(--white); background: var(--sva-teal); }
+    .featured-credit > span { display: block; margin-bottom: 8px; font-family: var(--display); font-size: 15px; letter-spacing: .04em; text-transform: uppercase; }
+    .featured-credit strong { display: block; font-family: var(--display); font-size: clamp(27px, 5vw, 47px); letter-spacing: .01em; line-height: .95; }
+    .featured-credit .award-badge { display: table; }
+    .dialog-content h4 { margin: 0 0 12px; color: var(--sva-red); font-family: var(--display); font-size: 19px; letter-spacing: .04em; text-transform: uppercase; }
+    .credit-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin: 0; padding: 0; border-top: 1px solid var(--line); border-left: 1px solid var(--line); list-style: none; }
+    .credit-list li { min-height: 90px; padding: 14px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); font-weight: 800; }
+    .dialog-note { margin: 24px 0 0; color: var(--muted); font-size: 14px; }
+    .profile-links { display: grid; justify-items: start; gap: 12px; margin-top: 20px; }
+    .imdb-link { display: inline-flex; padding: 10px 13px; color: var(--white); background: var(--sva-red); border: 1px solid var(--sva-red); font-family: var(--display); font-size: 16px; letter-spacing: .03em; text-decoration: none; text-transform: uppercase; }
+    .imdb-link:hover { color: var(--sva-red); background: var(--white); }
+    .image-source { display: inline-block; color: var(--sva-teal); font-size: 13px; font-weight: 700; }
+    button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
 
-    .featured-credit {
-      margin-bottom: 28px;
-      padding: 20px;
-      background: var(--red);
-      color: var(--white);
-    }
-
-    .featured-credit span {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 12px;
-      font-weight: 900;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-    .featured-credit strong {
-      display: block;
-      font-size: clamp(25px, 5vw, 44px);
-      line-height: 1;
-    }
-
-    .dialog-content h4 {
-      margin: 0 0 12px;
-      font-size: 14px;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-    }
-
-    .credit-list {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .credit-list li {
-      min-height: 86px;
-      padding: 14px;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      font-weight: 800;
-    }
-
-    .dialog-note {
-      margin: 24px 0 0;
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .profile-links {
-      display: grid;
-      justify-items: start;
-      gap: 12px;
-      margin-top: 18px;
-    }
-
-    .imdb-link {
-      display: inline-flex;
-      padding: 10px 12px;
-      color: var(--ink);
-      background: #f5c518;
-      border: 1px solid var(--ink);
-      font-size: 14px;
-      font-weight: 900;
-      letter-spacing: .04em;
-      text-transform: uppercase;
-      text-decoration: none;
-    }
-
-    .imdb-link:hover { background: #ffd84d; }
-
-    .image-source {
-      display: inline-block;
-      color: var(--muted);
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    button:focus-visible,
-    input:focus-visible,
-    a:focus-visible {
-      outline: 3px solid var(--focus);
-      outline-offset: 3px;
-    }
-
-    @media (max-width: 1050px) {
+    @media (max-width: 1080px) {
+      .global-nav a:nth-last-child(-n+2) { display: none; }
       .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .intro { grid-template-columns: 1fr; }
-      .intro-copy { max-width: 680px; }
+      .intro-copy { max-width: 760px; }
     }
-
-    @media (max-width: 760px) {
-      .draft-label { display: none; }
+    @media (max-width: 780px) {
+      .global-nav { display: none; }
+      .header-actions { margin-left: auto; }
+      .header-action:first-child { display: none; }
       .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .credit-list { grid-template-columns: 1fr; }
+      .site-footer { grid-template-columns: 1fr 1fr; }
     }
-
-    @media (max-width: 500px) {
-      .topbar { min-height: 64px; }
-      .brand-copy { font-size: 12px; }
-      h1 { font-size: 53px; }
+    @media (max-width: 520px) {
+      .header-action { min-width: 72px; padding: 0 13px; }
+      .intro { padding-top: 23px; }
+      h1 { font-size: 58px; }
+      .department-nav { gap: 26px; }
       .grid { grid-template-columns: 1fr; }
-      .poster-title { font-size: 39px; }
-      .section-heading { align-items: end; }
+      .poster-title { font-size: 41px; }
+      .site-footer { grid-template-columns: 1fr; }
     }
-
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
     }
@@ -519,19 +426,39 @@
 <body>
   <header class="topbar">
     <a class="brand" href="#top" aria-label="SVA BFA Film alumni concept home">
-      <span class="brand-mark" aria-hidden="true">SVA</span>
+      <span class="brand-mark" aria-hidden="true">✹</span>
       <span class="brand-copy"><span>BFA Film</span><span>Alumni</span></span>
     </a>
-    <span class="draft-label">Website concept · Internal review</span>
+    <nav class="global-nav" aria-label="SVA sections">
+      <a href="https://sva.edu/academics">Academics</a>
+      <a href="https://sva.edu/admissions">Admissions</a>
+      <a href="https://sva.edu/life-at-sva">Life@SVA</a>
+      <a href="https://sva.edu/faculty">Faculty</a>
+      <a href="https://sva.edu/alumni">Alumni</a>
+      <a href="https://sva.edu/about">About</a>
+    </nav>
+    <div class="header-actions">
+      <a class="header-action" href="https://sva.edu/get-info/undergraduate">Get info</a>
+      <a class="header-action" href="https://sva.edu/academics/undergraduate/bfa-film/undergraduate-application-requirements">Apply</a>
+    </div>
   </header>
 
   <section class="intro" id="top">
     <div>
-      <p class="eyebrow">SVA BFA Film</p>
-      <h1>Alumni at work</h1>
+      <p class="eyebrow">Academics &gt; Undergraduate &gt; BFA Film</p>
+      <h1>Alumni</h1>
     </div>
-    <p class="intro-copy">Meet graduates whose work spans directing, screenwriting, cinematography, editing, sound, music and makeup across film and television.</p>
+    <p class="intro-copy">Meet BFA Film graduates whose work spans directing, screenwriting, cinematography, editing, sound, music and makeup across film and television.</p>
   </section>
+
+  <nav class="department-nav" aria-label="BFA Film pages">
+    <a href="https://sva.edu/academics/undergraduate/bfa-film">Overview</a>
+    <a href="https://sva.edu/academics/undergraduate/bfa-film/curriculum">Curriculum</a>
+    <a href="https://sva.edu/academics/undergraduate/bfa-film/faculty">Faculty</a>
+    <a href="#alumni-grid" aria-current="page">Alumni</a>
+    <a href="https://sva.edu/academics/undergraduate/bfa-film/events">Events</a>
+    <a href="https://sva.edu/academics/undergraduate/bfa-film/student-work">Student Work</a>
+  </nav>
 
   <section class="controls" aria-label="Alumni filters">
     <div>
@@ -561,6 +488,31 @@
       This concept uses small promotional thumbnails only to identify and discuss each alumnus’s credited contribution. The images remain copyrighted; their inclusion here does not establish permission for public release. Alumni status, class years, titles, credits and image rights should be confirmed before publication.
     </aside>
   </main>
+
+  <footer class="site-footer">
+    <div>
+      <h2 class="footer-title">School of Visual Arts</h2>
+      <p class="footer-copy">BFA Film · 209 East 23rd Street, 5th floor · New York, NY 10010 · 212.592.2180 · bfafilm@sva.edu</p>
+    </div>
+    <div class="footer-group">
+      <strong>BFA Film</strong>
+      <a href="https://sva.edu/academics/undergraduate/bfa-film">Overview</a>
+      <a href="https://sva.edu/academics/undergraduate/bfa-film/curriculum">Curriculum</a>
+      <a href="https://sva.edu/academics/undergraduate/bfa-film/faculty">Faculty</a>
+    </div>
+    <div class="footer-group">
+      <strong>Jump in</strong>
+      <a href="https://sva.edu/admissions">Apply</a>
+      <a href="https://sva.edu/admissions/visit">Visit</a>
+      <a href="https://sva.edu/get-info/undergraduate">Request info</a>
+    </div>
+    <div class="footer-group">
+      <strong>Connect</strong>
+      <a href="https://www.instagram.com/svafilmnyc/">Instagram</a>
+      <a href="https://vimeo.com/svafilm/">Vimeo</a>
+      <a href="https://film.sva.edu/">Department site</a>
+    </div>
+  </footer>
 
   <dialog id="profile-dialog" aria-labelledby="dialog-name">
     <div class="dialog-top">
